@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Globe2, Info } from "lucide-react";
-import { api, num } from "@/components/context";
+import { ArrowUpRight, Globe2, Info, Send, Github } from "lucide-react";
+import { api, num, useGarden } from "@/components/context";
 import { ConsumptionChart } from "@/components/charts";
 import {
   ConcentrationChart,
@@ -33,6 +33,7 @@ type Experiment = {
   }[];
 };
 export default function Home() {
+  const { catalog } = useGarden();
   const [data, setData] = useState<Overview | null>(null),
     [experiment, setExperiment] = useState<Experiment | null>(null),
     [error, setError] = useState(""),
@@ -102,6 +103,39 @@ export default function Home() {
           registros
         </span>
       </div>
+      <section className="card garden-invitation">
+        <div>
+          <div className="eyebrow">CONOCE A GARDEN</div>
+          <h2>Tu próxima pregunta sobre café, en Telegram.</h2>
+          <p>
+            Consulta proyecciones, interpreta los datos y explora temas de café
+            con nuestro asistente. Prueba con:{" "}
+            <strong>“Proyecta el consumo de Vietnam a cinco años”.</strong>
+          </p>
+        </div>
+        <div className="invitation-actions">
+          {catalog?.telegram_url && (
+            <a
+              className="button"
+              href={catalog.telegram_url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Send size={18} /> Probar en Telegram <ArrowUpRight size={16} />
+            </a>
+          )}
+          {catalog?.repository_url && (
+            <a
+              className="button secondary"
+              href={catalog.repository_url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github size={17} /> Ver proyecto en GitHub
+            </a>
+          )}
+        </div>
+      </section>
       <div className="notice">
         <Info size={18} />
         <span>

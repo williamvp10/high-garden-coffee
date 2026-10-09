@@ -1007,3 +1007,44 @@ tbody tr:last-child td {
     grid-template-columns: 1fr;
   }
 }
+.sidebar-telegram {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px 8px;
+}
+.garden-invitation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  background: var(--paper);
+  border-color: var(--primary);
+}
+.garden-invitation p {
+  margin-bottom: 0;
+  max-width: 740px;
+}
+.invitation-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+@media (max-width: 1050px) {
+  .garden-invitation {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .invitation-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 740px) {
+  .sidebar-telegram {
+    margin-top: 10px;
+  }
+  .invitation-actions {
+    flex-direction: column;
+  }
+}

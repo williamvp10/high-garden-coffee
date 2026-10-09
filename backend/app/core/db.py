@@ -7,7 +7,7 @@ from psycopg_pool import AsyncConnectionPool
 from .config import settings
 
 pool = AsyncConnectionPool(
-    settings.database_url,
+    settings.database_conninfo,
     open=False,
     min_size=2,
     max_size=12,

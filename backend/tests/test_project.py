@@ -216,7 +216,7 @@ async def test_postgres_checkpoint_isolation():
     from psycopg.rows import dict_row
 
     async with AsyncConnectionPool(
-        settings.database_url,
+        settings.database_conninfo,
         kwargs={"autocommit": True, "row_factory": dict_row, "prepare_threshold": 0},
     ) as local_pool:
         saver = AsyncPostgresSaver(local_pool)
@@ -243,7 +243,7 @@ async def test_polling_inbox_cursor_atomic_and_deduplicated():
     from psycopg.rows import dict_row
 
     async with AsyncConnectionPool(
-        settings.database_url, kwargs={"autocommit": True, "row_factory": dict_row}
+        settings.database_conninfo, kwargs={"autocommit": True, "row_factory": dict_row}
     ) as local_pool:
         async with local_pool.connection() as conn:
             async with conn.transaction():
@@ -263,3 +263,20 @@ async def test_polling_inbox_cursor_atomic_and_deduplicated():
                 assert (await cur.fetchone())["next_offset"] == update["update_id"] + 1
                 # No modificar el cursor ni entregar mensajes falsos al bot real.
                 raise Rollback()
+
+
+def test_database_password_is_not_parsed_as_a_url(monkeypatch):
+    from psycopg.conninfo import conninfo_to_dict
+    from pydantic import SecretStr
+
+    # Contraseña sintética: caracteres reservados, espacios, comillas y barra inversa.
+    password = "demo@host:#%/ ?'\\$end"
+    monkeypatch.setattr(settings, "postgres_host", "postgres")
+    monkeypatch.setattr(settings, "postgres_password", SecretStr(password))
+    parsed = conninfo_to_dict(settings.database_conninfo)
+    assert parsed["password"] == password
+    assert parsed["host"] == "postgres"
+    assert parsed["user"] == "coffee" and parsed["dbname"] == "coffee"
+    assert parsed["port"] == "5432"
+    monkeypatch.setattr(settings, "postgres_host", "")
+    assert settings.database_conninfo == settings.database_url

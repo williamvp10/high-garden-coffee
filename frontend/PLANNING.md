@@ -16,3 +16,7 @@ Predicciones y cálculos vienen de API. El navegador no recibe claves OpenAI/Tav
 - Inicio precede a Predicciones y reúne introducción, KPIs, trayectoria conjunta 1/5/10, participación de mercados y dispersión de tamaño frente a cambio absoluto a cinco años. Tabla accesible con todos los países.
 - Lista corta por incremento absoluto: Ethiopia, Viet Nam y Costa Rica; recomendaciones de investigación, actualización de datos y pilotos sujetos a compradores y margen. Explica precios ausentes, consumo vs importaciones, origen 2019/20, unidad sin verificar y horizonte de diez años sin validar.
 - Enlaces por mercado abren `/predicciones?country=...`; se conserva la gráfica de observado/proyectado primero.
+
+## Accesos públicos
+- Repositorio público: https://github.com/williamvp10/high-garden-coffee; valor predeterminado en ambos Compose y ejemplo de entorno.
+- Invitación destacada en Inicio con ejemplo de consulta y acceso directo a Telegram/GitHub; botón de Telegram bajo la navegación, visible también en móvil.

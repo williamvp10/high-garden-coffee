@@ -9,7 +9,8 @@ services:
     ports: ["127.0.0.1:${DB_PORT:-55433}:5432"]
     volumes: ["coffee_pg:/var/lib/postgresql/data"]
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U coffee -d coffee"]
+      # Comprueba autenticación TCP, además de disponibilidad del proceso.
+      test: ["CMD-SHELL", "PGPASSWORD=\"$$POSTGRES_PASSWORD\" psql -h 127.0.0.1 -U coffee -d coffee -c 'SELECT 1' >/dev/null"]
       interval: 5s
       timeout: 3s
       retries: 20
@@ -20,7 +21,12 @@ services:
     restart: unless-stopped
     env_file: .env
     environment:
-      DATABASE_URL: postgresql://coffee:${POSTGRES_PASSWORD}@postgres:5432/coffee
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: coffee
+      POSTGRES_USER: coffee
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Configurar POSTGRES_PASSWORD}
+      REPOSITORY_URL: ${REPOSITORY_URL:-https://github.com/williamvp10/high-garden-coffee}
     ports: ["127.0.0.1:${API_PORT:-8200}:8000"]
     depends_on:
       postgres: {condition: service_healthy}

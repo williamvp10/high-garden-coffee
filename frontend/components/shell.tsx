@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useState, ReactNode } from "react";
 import {
   Coffee,
+  Send,
   House,
   ChartNoAxesCombined,
   FlaskConical,
@@ -51,23 +52,21 @@ function Frame({ children }: { children: ReactNode }) {
             </Link>
           ))}
         </nav>
+        {catalog?.telegram_url && (
+          <a
+            className="button sidebar-telegram"
+            href={catalog.telegram_url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Send size={17} /> Probar en Telegram <ArrowUpRight size={15} />
+          </a>
+        )}
         <div className="sidebar-bottom">
           <div className="environment">
             <span className="dot" /> Experimento reproducible
             <small>Datos hasta 2019/20</small>
           </div>
-          {catalog?.telegram_url ? (
-            <a
-              className="external-link"
-              href={catalog.telegram_url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Probar en Telegram <ArrowUpRight size={16} />
-            </a>
-          ) : (
-            <span className="muted small">Telegram por configurar</span>
-          )}
           {catalog?.repository_url && (
             <a
               className="external-link"
@@ -75,7 +74,7 @@ function Frame({ children }: { children: ReactNode }) {
               target="_blank"
               rel="noreferrer"
             >
-              Repositorio <ArrowUpRight size={16} />
+              Ver repositorio <ArrowUpRight size={16} />
             </a>
           )}
           <button

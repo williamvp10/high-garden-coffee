@@ -2,6 +2,8 @@
 
 Plataforma de analítica y asistente cafetero: una API FastAPI, dashboard y chat Next.js, agente Deep Agents / LangGraph con OpenAI y Tavily, Telegram y memoria PostgreSQL.
 
+Web de producción prevista: [High Garden Coffee](https://highgardencoffee.dokploywill.dpdns.org/).
+
 ## Arranque local
 
 ```bash
