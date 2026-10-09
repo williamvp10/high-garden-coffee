@@ -1,0 +1,83 @@
+# Despliegue en Dokploy: origen Git, modo Docker Compose.
+# Los dominios y certificados se configuran en la pestaña Domains.
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: coffee
+      POSTGRES_USER: coffee
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Configurar POSTGRES_PASSWORD en Dokploy}
+    volumes:
+      - coffee_pg:/var/lib/postgresql/data
+    networks: [application]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U coffee -d coffee"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: unless-stopped
+    # Inyección explícita: los secretos de la API no se entregan al frontend.
+    environment:
+      DATABASE_URL: postgresql://coffee:${POSTGRES_PASSWORD}@postgres:5432/coffee
+      JWT_SECRET: ${JWT_SECRET:?Configurar JWT_SECRET en Dokploy}
+      INTERNAL_ACCESS_KEY: ${INTERNAL_ACCESS_KEY:?Configurar INTERNAL_ACCESS_KEY en Dokploy}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4.1-mini}
+      TAVILY_API_KEY: ${TAVILY_API_KEY:-}
+      TELEGRAM_MODE: ${TELEGRAM_MODE:-webhook}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_WEBHOOK_SECRET: ${TELEGRAM_WEBHOOK_SECRET:-}
+      TELEGRAM_INTERNAL_USERS: ${TELEGRAM_INTERNAL_USERS:-}
+      TELEGRAM_BOT_USERNAME: ${TELEGRAM_BOT_USERNAME:-}
+      REPOSITORY_URL: ${REPOSITORY_URL:-}
+      AGENT_TIMEOUT_SECONDS: ${AGENT_TIMEOUT_SECONDS:-90}
+      EXTERNAL_DAILY_LIMIT: ${EXTERNAL_DAILY_LIMIT:-20}
+      INTERNAL_DAILY_LIMIT: ${INTERNAL_DAILY_LIMIT:-100}
+    expose: ["8000"]
+    networks:
+      application:
+        # Alias único para evitar ambigüedad con otras APIs en la red de Traefik.
+        aliases: [high-garden-api]
+      dokploy-network: {}
+    depends_on:
+      postgres: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready')"]
+      interval: 10s
+      timeout: 5s
+      start_period: 60s
+      retries: 15
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+
+  web:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    restart: unless-stopped
+    environment:
+      API_BASE_URL: http://high-garden-api:8000
+      PORT: 3000
+      COOKIE_SECURE: "true"
+    expose: ["3000"]
+    networks: [application, dokploy-network]
+    depends_on:
+      api: {condition: service_healthy}
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+
+volumes:
+  # Mantener el nombre del proyecto Dokploy para reutilizar este volumen.
+  coffee_pg:
+
+networks:
+  application:
+  # Red existente de Traefik en la instalación Dokploy estándar.
+  dokploy-network:
+    external: true

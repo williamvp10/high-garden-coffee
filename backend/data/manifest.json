@@ -1,0 +1,13 @@
+{
+  "sha256_dataset": "77155660eb2bc481132f255d8d674f1adfba17c4244a0a99ea9f61f80722727d",
+  "python": "3.12.14",
+  "paquetes": {
+    "pandas": "3.0.6",
+    "pyarrow": "25.0.1",
+    "numpy": "2.5.3",
+    "matplotlib": "3.11.2",
+    "seaborn": "0.13.2",
+    "scikit-learn": "1.9.1",
+    "statsmodels": "0.15.0"
+  }
+}

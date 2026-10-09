@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+pydantic-settings
+psycopg[binary,pool]
+PyJWT
+httpx
+deepagents
+langchain-openai
+langgraph-checkpoint-postgres
+tavily-python
+pandas==3.0.6
+pyarrow==25.0.1
+numpy==2.5.3
+statsmodels==0.15.0
+pytest
+pytest-asyncio

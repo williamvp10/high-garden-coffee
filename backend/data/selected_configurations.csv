@@ -1,0 +1,166 @@
+country,model_name,config,selection_metric,development_score,status
+Angola,Linear Regression,linear,MASE,0.9603174603174603,ok
+Bolivia (Plurinational State of),Linear Regression,linear,MASE,0.5306609195402285,ok
+Brazil,Linear Regression,linear,MASE,0.8514431283983019,ok
+Burundi,Linear Regression,linear,MASE,5.470911826773099,ok
+Cameroon,Linear Regression,linear,MASE,1.9326828391734,ok
+Central African Republic,Linear Regression,linear,MASE,2.8337874109002943,ok
+Colombia,Linear Regression,linear,MASE,4.927776155853107,ok
+Congo,Linear Regression,linear,MASE,1.6101190476190603,ok
+Costa Rica,Linear Regression,linear,MAE,2344068.8571428573,ok
+Cuba,Linear Regression,linear,MASE,1.7985814597025216,ok
+Côte d'Ivoire,Linear Regression,linear,MASE,4.410829821964427,ok
+Democratic Republic of Congo,Linear Regression,linear,MAE,0.0,ok
+Dominican Republic,Linear Regression,linear,MASE,2.0542568614292085,ok
+Ecuador,Linear Regression,linear,MASE,4.707321428571429,ok
+El Salvador,Linear Regression,linear,MASE,4.125429605519404,ok
+Equatorial Guinea,Linear Regression,linear,MAE,0.0,ok
+Ethiopia,Linear Regression,linear,MASE,1.1247461481536896,ok
+Gabon,Linear Regression,linear,MASE,5.0906688873001915,ok
+Ghana,Linear Regression,linear,MASE,0.7728979891086122,ok
+Guatemala,Linear Regression,linear,MASE,7.689540816326513,ok
+Guinea,Linear Regression,linear,MASE,1.187166950113376,ok
+Guyana,Linear Regression,linear,MASE,0.4925969141945547,ok
+Haiti,Linear Regression,linear,MASE,2.488888888888893,ok
+Honduras,Linear Regression,linear,MASE,2.855455188832563,ok
+India,Linear Regression,linear,MASE,1.9467753430311978,ok
+Indonesia,Linear Regression,linear,MASE,5.8648730730547225,ok
+Jamaica,Linear Regression,linear,MASE,0.6088166731241116,ok
+Kenya,Linear Regression,linear,MAE,30000.0,ok
+Lao People's Democratic Republic,Linear Regression,linear,MASE,1.9922959183673488,ok
+Liberia,Linear Regression,linear,MASE,5.41428571428571,ok
+Madagascar,Linear Regression,linear,MASE,2.800681224460795,ok
+Malawi,Linear Regression,linear,MASE,5.732142857142858,ok
+Mexico,Linear Regression,linear,MASE,3.4504387088577024,ok
+Nepal,Linear Regression,linear,MAE,0.0,ok
+Nicaragua,Linear Regression,linear,MASE,0.9480427571406882,ok
+Nigeria,Linear Regression,linear,MASE,3.288928571428576,ok
+Panama,Linear Regression,linear,MASE,0.4392184712501831,ok
+Papua New Guinea,Linear Regression,linear,MASE,2.0736841269841264,ok
+Paraguay,Linear Regression,linear,MASE,5.4142857142856915,ok
+Peru,Linear Regression,linear,MASE,3.510555555555552,ok
+Philippines,Linear Regression,linear,MASE,10.089159626323307,ok
+Rwanda,Linear Regression,linear,MASE,0.831332913742924,ok
+Sierra Leone,Linear Regression,linear,MASE,2.1975000000000002,ok
+Sri Lanka,Linear Regression,linear,MASE,3.1310663973959985,ok
+Tanzania,Linear Regression,linear,MASE,3.7980861253355505,ok
+Thailand,Linear Regression,linear,MASE,4.592444619514475,ok
+Timor-Leste,Linear Regression,linear,MAE,14700.0,ok
+Togo,Linear Regression,linear,MASE,13.41163095238095,ok
+Trinidad & Tobago,Linear Regression,linear,MASE,4.964980158730164,ok
+Uganda,Linear Regression,linear,MASE,1.260971766720963,ok
+Venezuela,Linear Regression,linear,MASE,1.6471061967880107,ok
+Viet Nam,Linear Regression,linear,MASE,8.838078104820225,ok
+Yemen,Linear Regression,linear,MASE,3.937060329229006,ok
+Zambia,Linear Regression,linear,MASE,1.705968821783455,ok
+Zimbabwe,Linear Regression,linear,MASE,6.323862847753759,ok
+Angola,ETS,additive,MASE,0.9603178800237442,ok
+Bolivia (Plurinational State of),ETS,additive,MASE,1.772818164436385,ok
+Brazil,ETS,additive,MASE,0.6565690941699446,ok
+Burundi,ETS,damped,MASE,6.768181939979233,ok
+Cameroon,ETS,damped,MASE,0.7520029285964375,ok
+Central African Republic,ETS,additive,MASE,1.7300996432849889,ok
+Colombia,ETS,additive,MASE,3.5842294712295115,ok
+Congo,ETS,damped,MASE,0.5012350168863091,ok
+Costa Rica,ETS,damped,MAE,3812540.730542142,ok
+Cuba,ETS,additive,MASE,0.39246652366220364,ok
+Côte d'Ivoire,ETS,damped,MASE,2.0032405100115573,ok
+Democratic Republic of Congo,ETS,damped,MAE,4.656612873077393e-10,ok
+Dominican Republic,ETS,damped,MASE,2.1395632880300584,ok
+Ecuador,ETS,damped,MASE,1.9661656113637775,ok
+El Salvador,ETS,damped,MASE,1.9383506608993026,ok
+Equatorial Guinea,ETS,additive,MAE,0.0,ok
+Ethiopia,ETS,damped,MASE,0.7443931385988662,ok
+Gabon,ETS,damped,MASE,3.6551222946079154,ok
+Ghana,ETS,damped,MASE,0.49216983463921343,ok
+Guatemala,ETS,additive,MASE,5.604900015189269,ok
+Guinea,ETS,damped,MASE,0.5064479386407396,ok
+Guyana,ETS,additive,MASE,0.4925972352635967,ok
+Haiti,ETS,damped,MASE,0.8322761536821419,ok
+Honduras,ETS,additive,MASE,1.0162961284048533,ok
+India,ETS,damped,MASE,0.5016402712348972,ok
+Indonesia,ETS,additive,MASE,5.06389218549542,ok
+Jamaica,ETS,damped,MASE,0.03604597411327562,ok
+Kenya,ETS,damped,MAE,30000.000000000022,ok
+Lao People's Democratic Republic,ETS,damped,MASE,0.9283419783255744,ok
+Liberia,ETS,damped,MASE,1.286665293749206,ok
+Madagascar,ETS,additive,MASE,0.49971635041144713,ok
+Malawi,ETS,damped,MASE,1.8927445632619655,ok
+Mexico,ETS,additive,MASE,2.51421799794035,ok
+Nepal,ETS,additive,MAE,0.0,ok
+Nicaragua,ETS,damped,MASE,0.5457849968781563,ok
+Nigeria,ETS,damped,MASE,0.0070061937804481635,ok
+Panama,ETS,damped,MASE,0.07275438157008574,ok
+Papua New Guinea,ETS,additive,MASE,1.802599750717845,ok
+Paraguay,ETS,damped,MASE,1.2866845612919464,ok
+Peru,ETS,damped,MASE,2.39750342436093,ok
+Philippines,ETS,additive,MASE,4.425196017766018,ok
+Rwanda,ETS,additive,MASE,4.534818817260266e-06,ok
+Sierra Leone,ETS,damped,MASE,0.33149878636493335,ok
+Sri Lanka,ETS,damped,MASE,0.9683046190150524,ok
+Tanzania,ETS,additive,MASE,1.9314892242936024,ok
+Thailand,ETS,damped,MASE,3.7357962277887804,ok
+Timor-Leste,ETS,additive,MAE,14700.0,ok
+Togo,ETS,damped,MASE,8.50719736027743,ok
+Trinidad & Tobago,ETS,damped,MASE,1.7926128850033218,ok
+Uganda,ETS,additive,MASE,1.5756735717255506,ok
+Venezuela,ETS,damped,MASE,1.024497303565154,ok
+Viet Nam,ETS,additive,MASE,2.575502200572141,ok
+Yemen,ETS,damped,MASE,1.6597292812926903,ok
+Zambia,ETS,additive,MASE,1.8220606057181086,ok
+Zimbabwe,ETS,damped,MASE,0.9008009116683962,ok
+Angola,ARIMA,"0,1,0",MASE,0.4,ok
+Bolivia (Plurinational State of),ARIMA,"0,1,0",MASE,2.015258620689655,ok
+Brazil,ARIMA,"1,1,0",MASE,0.433427585047947,ok
+Burundi,ARIMA,"0,0,0",MASE,2.956309300782097,ok
+Cameroon,ARIMA,"0,1,0",MASE,0.3694842767295608,ok
+Central African Republic,ARIMA,"0,1,1",MASE,0.8218923167276683,ok
+Colombia,ARIMA,"0,1,0",MASE,3.6673351656841633,ok
+Congo,ARIMA,"0,1,0",MASE,0.0,ok
+Costa Rica,ARIMA,"0,0,0",MAE,1663194.7411661432,ok
+Cuba,ARIMA,"0,1,0",MASE,0.09491525423729649,ok
+Côte d'Ivoire,ARIMA,"0,1,0",MASE,0.0026223717220353474,ok
+Democratic Republic of Congo,ARIMA,"0,1,0",MAE,0.0,ok
+Dominican Republic,ARIMA,"0,1,0",MASE,0.13441962874548014,ok
+Ecuador,ARIMA,"0,1,0",MASE,0.0475,ok
+El Salvador,ARIMA,"1,1,0",MASE,1.8897119857074767,ok
+Equatorial Guinea,ARIMA,"0,0,0",MAE,0.0,ok
+Ethiopia,ARIMA,"1,1,0",MASE,0.14980882897915507,ok
+Gabon,ARIMA,"0,0,0",MASE,3.0430260088460828,ok
+Ghana,ARIMA,"0,1,0",MASE,0.03301373412801244,ok
+Guatemala,ARIMA,"1,1,0",MASE,5.367206807510426,ok
+Guinea,ARIMA,"0,1,0",MASE,0.0,ok
+Guyana,ARIMA,"0,1,0",MASE,0.7270310788778109,ok
+Haiti,ARIMA,"0,1,0",MASE,0.0,ok
+Honduras,ARIMA,"0,1,0",MASE,0.8920366244550721,ok
+India,ARIMA,"1,1,0",MASE,0.8989924984290024,ok
+Indonesia,ARIMA,"0,1,0",MASE,5.657059876299513,ok
+Jamaica,ARIMA,"0,1,0",MASE,0.0,ok
+Kenya,ARIMA,"0,1,0",MAE,30000.0,ok
+Lao People's Democratic Republic,ARIMA,"0,1,0",MASE,0.20000000000000043,ok
+Liberia,ARIMA,"0,1,0",MASE,0.0,ok
+Madagascar,ARIMA,"0,1,0",MASE,0.21630970317367265,ok
+Malawi,ARIMA,"0,1,0",MASE,1.152026622245709e-15,ok
+Mexico,ARIMA,"0,1,1",MASE,2.830711600710825,ok
+Nepal,ARIMA,"0,0,0",MAE,0.0,ok
+Nicaragua,ARIMA,"0,1,0",MASE,0.30664257064520567,ok
+Nigeria,ARIMA,"0,1,0",MASE,0.0,ok
+Panama,ARIMA,"0,1,0",MASE,0.0,ok
+Papua New Guinea,ARIMA,"0,1,0",MASE,1.4528666666666668,ok
+Paraguay,ARIMA,"0,1,0",MASE,0.0,ok
+Peru,ARIMA,"0,1,0",MASE,1.4,ok
+Philippines,ARIMA,"1,1,0",MASE,5.399962460866933,ok
+Rwanda,ARIMA,"0,1,0",MASE,1.591416801002499e-16,ok
+Sierra Leone,ARIMA,"0,1,0",MASE,0.0,ok
+Sri Lanka,ARIMA,"0,0,0",MASE,0.8253498779299744,ok
+Tanzania,ARIMA,"1,1,0",MASE,2.5821368472725825,ok
+Thailand,ARIMA,"0,1,0",MASE,3.765563725490197,ok
+Timor-Leste,ARIMA,"0,0,0",MAE,14700.0,ok
+Togo,ARIMA,"0,1,0",MASE,6.759250000000001,ok
+Trinidad & Tobago,ARIMA,"0,1,0",MASE,1.725,ok
+Uganda,ARIMA,"1,1,0",MASE,2.8893686396391454,ok
+Venezuela,ARIMA,"1,1,0",MASE,0.11970353185025392,ok
+Viet Nam,ARIMA,"1,1,0",MASE,2.087486288865483,ok
+Yemen,ARIMA,"1,1,0",MASE,0.16040131347095035,ok
+Zambia,ARIMA,"0,1,0",MASE,0.362962962962963,ok
+Zimbabwe,ARIMA,"0,1,0",MASE,0.0,ok
