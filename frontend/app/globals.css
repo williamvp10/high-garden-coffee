@@ -1048,3 +1048,26 @@ tbody tr:last-child td {
     flex-direction: column;
   }
 }
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  max-width: 1450px;
+  margin: 0 auto 24px;
+  padding: 20px 42px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+}
+.site-footer strong {
+  color: var(--primary);
+  font-weight: 600;
+}
+@media (max-width: 740px) {
+  .site-footer {
+    padding: 20px 16px;
+    flex-direction: column;
+  }
+}

@@ -113,6 +113,12 @@ function Frame({ children }: { children: ReactNode }) {
             children
           )}
         </div>
+        <footer className="site-footer">
+          <span>High Garden Coffee · Coffee Intelligence</span>
+          <span>
+            Un proyecto de <strong>William David Vasquez Parada</strong>
+          </span>
+        </footer>
       </main>
       {modal && (
         <div className="modal-backdrop">

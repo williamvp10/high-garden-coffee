@@ -20,3 +20,5 @@ Predicciones y cálculos vienen de API. El navegador no recibe claves OpenAI/Tav
 ## Accesos públicos
 - Repositorio público: https://github.com/williamvp10/high-garden-coffee; valor predeterminado en ambos Compose y ejemplo de entorno.
 - Invitación destacada en Inicio con ejemplo de consulta y acceso directo a Telegram/GitHub; botón de Telegram bajo la navegación, visible también en móvil.
+
+- Autoría visible en el pie de todas las páginas: William David Vasquez Parada. README con enlace destacado a la versión en vivo.

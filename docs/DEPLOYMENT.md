@@ -27,7 +27,7 @@ En **Environment**, configurar:
 | `TELEGRAM_INTERNAL_USERS` | IDs internos separados por comas, opcional. |
 | `REPOSITORY_URL` | `https://github.com/williamvp10/high-garden-coffee` (valor predeterminado). |
 
-Generar cada secreto con `python3 -c "import secrets; print(secrets.token_hex(32))"`. Guardarlos en Dokploy; no versionarlos. El YAML inyecta las variables explícitamente. La API recibe `POSTGRES_HOST=postgres`, puerto `5432`, base/usuario `coffee` y la misma `POSTGRES_PASSWORD` que el contenedor PostgreSQL. Psycopg construye la conexión con parámetros escapados, sin insertar la contraseña en una URL. No agregar `POSTGRES_HOST=localhost` ni pegar la conexión local en Dokploy. `DATABASE_URL` queda como alternativa para desarrollo fuera de Compose. La web recibe solo su URL interna de API y usa cookies seguras con HTTPS.
+Generar cada secreto con `python3 -c "import secrets; print(secrets.token_hex(32))"`. Guardarlos en Dokploy; no versionarlos. El YAML inyecta las variables explícitamente. La API recibe `POSTGRES_HOST=high-garden-coffee-postgres`, puerto `5432`, base/usuario `coffee` y la misma `POSTGRES_PASSWORD` que el contenedor PostgreSQL. Psycopg construye la conexión con parámetros escapados, sin insertar la contraseña en una URL. No agregar `POSTGRES_HOST=localhost` ni pegar la conexión local en Dokploy. `DATABASE_URL` queda como alternativa para desarrollo fuera de Compose. La web recibe solo su URL interna de API y usa cookies seguras con HTTPS.
 
 ## 3. Dominios y HTTPS
 
@@ -40,7 +40,7 @@ Crear registros DNS hacia la VPS. En **Domains**, añadir:
 
 El dominio web confirmado es https://highgardencoffee.dokploywill.dpdns.org/. El dominio `api.tu-dominio.com` es un marcador: sustituirlo por un dominio de API propio si se expondrá el webhook de Telegram o Swagger. La web consulta la API por la red interna y no necesita un segundo dominio para funcionar.
 
-Activar HTTPS/certificado. Dokploy configura las rutas de Traefik desde Domains; no hace falta publicar puertos en el host. Revisar **Preview Compose** para confirmar etiquetas y redes. El YAML usa `dokploy-network` externa para Traefik y una red propia para comunicación entre servicios; PostgreSQL queda únicamente en la red propia. Si tu instalación cambió el nombre de la red de Traefik, ajustarlo antes de desplegar. [Dominios de Compose](https://docs.dokploy.com/docs/core/docker-compose/domains).
+Activar HTTPS/certificado. Dokploy configura las rutas de Traefik desde Domains; no hace falta publicar puertos en el host. Revisar **Preview Compose** para confirmar etiquetas y redes. El YAML conecta web a `dokploy-network` para Traefik y mantiene API/PostgreSQL en la red propia. En Networks del servicio Compose de Dokploy, desactivar la conexión de `api` a `dokploy-network` (detach); Dokploy puede agregar conexiones por defecto. La base tiene el alias privado `high-garden-coffee-postgres`, usado por `POSTGRES_HOST`. Si se agrega un dominio público a API para Telegram/Swagger, permitir su conexión a Traefik y conservar el alias privado de base. Si tu instalación cambió el nombre de la red de Traefik, ajustarlo antes de desplegar. [Dominios de Compose](https://docs.dokploy.com/docs/core/docker-compose/domains).
 
 ## 4. Desplegar y verificar
 
@@ -110,7 +110,7 @@ Después volver a desplegar. Comprobar `postgres → api → web` saludables. No
 En la terminal del servicio PostgreSQL:
 
 ```bash
-PGPASSWORD="$POSTGRES_PASSWORD" psql -h 127.0.0.1 -U coffee -d coffee -c 'SELECT 1'
+PGPASSWORD="$POSTGRES_PASSWORD" psql -h "$(hostname -i)" -U coffee -d coffee -c 'SELECT 1'
 ```
 
 En la terminal del servicio API, una vez iniciado:
@@ -119,4 +119,16 @@ En la terminal del servicio API, una vez iniciado:
 python -c "import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:8000/health/ready').read().decode())"
 ```
 
-El healthcheck de PostgreSQL ahora comprueba autenticación por TCP; el anterior `pg_isready` solo confirmaba disponibilidad del servidor.
+El healthcheck usa la IP del contenedor para comprobar autenticación por TCP; `localhost` puede tener regla `trust` y no comprobar la contraseña. El anterior `pg_isready` solo confirmaba disponibilidad del servidor.
+
+## Incidente verificado: DNS de otra base en `dokploy-network`
+
+En la VPS se confirmó que PostgreSQL de High Garden estaba en la red privada con IP `172.26.0.2`, mientras la API conectaba al nombre `postgres` resuelto como `10.0.1.18` en la red compartida. Su healthcheck por localhost pasaba, pero una regla `trust` evitaba comprobar la contraseña. Después de corregir DNS se comprobó un segundo problema: la contraseña almacenada en el usuario no coincidía con la configuración actual, aunque API y PostgreSQL tenían la misma variable.
+
+Se corrigió en Dokploy `serviceNetworks` para `api`: `detachDokployNetwork=true`, conservando la red privada `application` y todos los volúmenes. La vista previa dejó API solo en esa red. El dominio web se corrigió de puerto `3200` (local del host) a `3000` (contenedor). El YAML también usa un alias específico de PostgreSQL para evitar futuras colisiones si la API vuelve a exponerse por Traefik.
+
+Las IPs sirven como evidencia del incidente; no deben fijarse en variables porque Docker puede cambiarlas al recrear contenedores. Comprobar redes y destino antes de atribuir cada fallo de autenticación a una contraseña incorrecta.
+
+La sincronización del usuario `coffee` con el `POSTGRES_PASSWORD` ya configurado requiere `\password coffee` en la terminal de PostgreSQL. Dokploy rechazó el comando temporal de despliegue por contener controles de shell; se retiró sin ejecutar SQL ni modificar datos. El healthcheck del YAML usa la IP del contenedor, evitando el falso positivo de localhost.
+
+Tras sincronizar la contraseña desde la terminal de PostgreSQL, el redeploy de la VPS terminó en `done`, con `postgres`, `api` y `web` saludables. El dominio HTTPS respondió HTTP 200 en catálogo (55 países) y predicción de Vietnam a diez años. La conexión privada y el puerto 3000 del dominio quedan configurados en Dokploy.
